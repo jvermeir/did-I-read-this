@@ -17,11 +17,11 @@
 package wuzuhwuzuh.booklist;
 
 /**
- * <p>Encapsulates the result of a barcode scan invoked through {@link IntentIntegrator}.</p>
+ * <p>Encapsulates the result of a barcode scan invoked through {@link ScannerIntentIntegrator}.</p>
  *
  * @author Sean Owen
  */
-public final class IntentResult {
+public final class ScannerIntentResult {
 
   private final String contents;
   private final String formatName;
@@ -29,15 +29,15 @@ public final class IntentResult {
   private final Integer orientation;
   private final String errorCorrectionLevel;
 
-  IntentResult() {
+  ScannerIntentResult() {
     this(null, null, null, null, null);
   }
 
-  IntentResult(String contents,
-               String formatName,
-               byte[] rawBytes,
-               Integer orientation,
-               String errorCorrectionLevel) {
+  ScannerIntentResult(String contents,
+                      String formatName,
+                      byte[] rawBytes,
+                      Integer orientation,
+                      String errorCorrectionLevel) {
     this.contents = contents;
     this.formatName = formatName;
     this.rawBytes = rawBytes;
