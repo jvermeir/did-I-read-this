@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Y</string>
+    <string name="app_name">Did I Read This?</string>
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send</string>
 </resources>

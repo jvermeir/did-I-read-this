@@ -12,12 +12,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setDisplayMessageActivityClass(TestDisplayMessageActivity.class);
         setContentView(R.layout.activity_main);
     }
 
-    /** Called when the user taps the Send button */
+    private Class displayMessageActivityClass = TestDisplayMessageActivity.class;
+
+    public void setDisplayMessageActivityClass(Class displayMessageActivityClass) {
+        this.displayMessageActivityClass = displayMessageActivityClass;
+    }
+
     public void sendMessage(View view) {
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
+        Intent intent = new Intent(this, displayMessageActivityClass);
         EditText editText = (EditText) findViewById(R.id.editText);
         String message = editText.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);
