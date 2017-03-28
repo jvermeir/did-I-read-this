@@ -30,4 +30,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void showList(View view) {
+        Intent intent = new Intent(this, ListViewLoaderActivity.class);
+        startActivity(intent);
+    }
+
 }
