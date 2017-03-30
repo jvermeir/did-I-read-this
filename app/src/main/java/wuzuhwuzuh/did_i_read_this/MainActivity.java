@@ -11,24 +11,23 @@ public class MainActivity extends AppCompatActivity {
     public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
     private EditText editText = null;
     public static final int GET_A_BARCODE = 1;
-    private Class displayMessageActivityClass = TestDisplayMessageActivity.class;
+    // Use test version by default to avoid dependency on scanner
+    private Class barcodeActivityClass = GetBarcodeTestActivity.class;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setDisplayMessageActivityClass(GetBarcodeTestActivity.class);
+        setBarcodeActivityClass(GetBarcodeTestActivity.class);
         setContentView(R.layout.activity_main);
         editText = (EditText) findViewById(R.id.editText);
     }
 
-    public void setDisplayMessageActivityClass(Class displayMessageActivityClass) {
-        this.displayMessageActivityClass = displayMessageActivityClass;
+    public void setBarcodeActivityClass(Class barcodeActivityClass) {
+        this.barcodeActivityClass = barcodeActivityClass;
     }
 
     public void sendMessage(View view) {
-        Intent intent = new Intent(this, displayMessageActivityClass);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
+        Intent intent = new Intent(this, barcodeActivityClass);
         startActivityForResult(intent, GET_A_BARCODE);
     }
 
@@ -37,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
             case GET_A_BARCODE:
                 if (resultCode == RESULT_OK) {
                     Bundle res = data.getExtras();
+                    // TODO extract constant
                     String result = res.getString("content");
                     editText.setText(result);
                 }
