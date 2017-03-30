@@ -12,12 +12,12 @@ public class MainActivity extends AppCompatActivity {
     private EditText editText = null;
     public static final int GET_A_BARCODE = 1;
     // Use test version by default to avoid dependency on scanner
-    private Class barcodeActivityClass = GetBarcodeTestActivity.class;
+    private Class barcodeActivityClass = GetBarcodeActivity.class;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setBarcodeActivityClass(GetBarcodeTestActivity.class);
+        setBarcodeActivityClass(barcodeActivityClass);
         setContentView(R.layout.activity_main);
         editText = (EditText) findViewById(R.id.editText);
     }

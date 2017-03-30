@@ -10,8 +10,6 @@ public class GetBarcodeTestActivity extends GetBarcodeActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_get_barcode);
-        scanResult = (TextView) findViewById(R.id.scanResult);
     }
 
     @Override
@@ -21,6 +19,7 @@ public class GetBarcodeTestActivity extends GetBarcodeActivity {
         }
     }
 
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         processScanningResult(intent, "3600029145");
         finish();

@@ -26,6 +26,7 @@ public class GetBarcodeActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanningResult != null) {
