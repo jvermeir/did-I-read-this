@@ -2,14 +2,10 @@ package wuzuhwuzuh.did_i_read_this;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class GetBarcodeTestActivity extends AppCompatActivity implements View.OnClickListener {
-
-    private TextView scanResult;
+public class GetBarcodeTestActivity extends GetBarcodeActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,21 +17,12 @@ public class GetBarcodeTestActivity extends AppCompatActivity implements View.On
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.scan) {
-            onActivityResult(1,2,new Intent());
+            onActivityResult(1, 2, new Intent());
         }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        String scanContent = "3600029145";
-        scanResult.setText("CONTENT: " + scanContent);
-        Toast toast = Toast.makeText(getApplicationContext(),
-                "dummy scanner says: "+scanContent, Toast.LENGTH_SHORT);
-        toast.show();
-        Bundle extras = new Bundle();
-        extras.putString("content", scanContent);
-        intent.putExtras(extras);
-        setResult(RESULT_OK, intent);
+        processScanningResult(intent, "3600029145");
         finish();
     }
-
 }
