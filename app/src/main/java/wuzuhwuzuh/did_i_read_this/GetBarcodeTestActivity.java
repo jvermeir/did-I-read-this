@@ -31,6 +31,11 @@ public class GetBarcodeTestActivity extends AppCompatActivity implements View.On
         Toast toast = Toast.makeText(getApplicationContext(),
                 "dummy scanner says: "+scanContent, Toast.LENGTH_SHORT);
         toast.show();
+        Bundle extras = new Bundle();
+        extras.putString("content", scanContent);
+        intent.putExtras(extras);
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
 }
