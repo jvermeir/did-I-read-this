@@ -12,7 +12,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setDisplayMessageActivityClass(TestDisplayMessageActivity.class);
+        setDisplayMessageActivityClass(GetBarcodeTestActivity.class);
         setContentView(R.layout.activity_main);
     }
 

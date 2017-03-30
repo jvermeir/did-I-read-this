@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Did I Read This?</string>
     <string name="edit_message">Enter a message</string>
-    <string name="button_send">Send</string>
+    <string name="button_scan">Scan</string>
     <string name="title_activity_list">ListActivity</string>
 </resources>
