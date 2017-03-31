@@ -8,11 +8,11 @@ import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+    public static final String BARCODE_VALUE = "content";
     private EditText editText = null;
     public static final int GET_A_BARCODE = 1;
-    // Use test version by default to avoid dependency on scanner
-    private Class barcodeActivityClass = GetBarcodeActivity.class;
+    private Class barcodeActivityClass = GetBarcodeTestActivity.class;
+//    private Class barcodeActivityClass = GetBarcodeActivity.class;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +36,7 @@ public class MainActivity extends AppCompatActivity {
             case GET_A_BARCODE:
                 if (resultCode == RESULT_OK) {
                     Bundle res = data.getExtras();
-                    // TODO extract constant
-                    String result = res.getString("content");
+                    String result = res.getString(BARCODE_VALUE);
                     editText.setText(result);
                 }
                 break;

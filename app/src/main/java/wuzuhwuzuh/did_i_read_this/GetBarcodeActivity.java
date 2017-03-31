@@ -7,15 +7,14 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class GetBarcodeActivity extends AppCompatActivity implements View.OnClickListener {
+import static wuzuhwuzuh.did_i_read_this.MainActivity.BARCODE_VALUE;
 
-    protected TextView scanResult;
+public class GetBarcodeActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_barcode);
-        scanResult = (TextView) findViewById(R.id.scanResult);
     }
 
     @Override
@@ -39,9 +38,8 @@ public class GetBarcodeActivity extends AppCompatActivity implements View.OnClic
     }
 
     protected void processScanningResult(Intent intent, String scanContent) {
-            scanResult.setText("CONTENT: " + scanContent);
             Bundle extras = new Bundle();
-            extras.putString("content", scanContent);
+            extras.putString(BARCODE_VALUE, scanContent);
             intent.putExtras(extras);
             setResult(RESULT_OK, intent);
             finish();
