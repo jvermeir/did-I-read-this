@@ -11,8 +11,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String BARCODE_VALUE = "content";
     private EditText editText = null;
     public static final int GET_A_BARCODE = 1;
-    private Class barcodeActivityClass = GetBarcodeTestActivity.class;
-//    private Class barcodeActivityClass = GetBarcodeActivity.class;
+//    private Class barcodeActivityClass = GetBarcodeTestActivity.class;
+    private Class barcodeActivityClass = GetBarcodeActivity.class;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

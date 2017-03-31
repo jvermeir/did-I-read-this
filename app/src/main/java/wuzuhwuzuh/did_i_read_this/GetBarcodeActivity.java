@@ -11,10 +11,15 @@ import static wuzuhwuzuh.did_i_read_this.MainActivity.BARCODE_VALUE;
 
 public class GetBarcodeActivity extends AppCompatActivity implements View.OnClickListener {
 
+    protected final boolean testmode = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_barcode);
+        if (!testmode) {
+            IntentIntegrator scanIntegrator = new IntentIntegrator(this);
+            scanIntegrator.initiateScan();
+        }
     }
 
     @Override

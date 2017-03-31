@@ -7,9 +7,11 @@ import android.widget.TextView;
 
 public class GetBarcodeTestActivity extends GetBarcodeActivity {
 
+    protected final boolean testmode=true;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        onActivityResult(1, 2, new Intent());
     }
 
     @Override
