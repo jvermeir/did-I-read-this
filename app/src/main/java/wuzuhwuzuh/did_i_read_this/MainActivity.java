@@ -10,17 +10,17 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     public static final String BARCODE_VALUE = "barcode_value";
-    private EditText editText = null;
+    private EditText barcodeText = null;
     public static final int GET_A_BARCODE = 1;
-//    private Class barcodeActivityClass = GetBarcodeTestActivity.class;
-    private Class barcodeActivityClass = GetBarcodeActivity.class;
+    private Class barcodeActivityClass = GetBarcodeTestActivity.class;
+//    private Class barcodeActivityClass = GetBarcodeActivity.class;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setBarcodeActivityClass(barcodeActivityClass);
         setContentView(R.layout.activity_main);
-        editText = (EditText) findViewById(R.id.editText);
+        barcodeText = (EditText) findViewById(R.id.editText);
     }
 
     public void setBarcodeActivityClass(Class barcodeActivityClass) {
@@ -31,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode) {
             case GET_A_BARCODE:
                 if (resultCode == RESULT_OK) {
-                    editText.setText(getBarcodeFromIntent(data));
-                    if (bookInList(editText.getText().toString())) {
+                    barcodeText.setText(getBarcodeFromIntent(data));
+                    if (bookInList(barcodeText.getText().toString())) {
                         Toast.makeText(this, "Book is in list already", Toast.LENGTH_LONG).show();
                     }
                 }
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void processBarcode(View view) {
-        String barcode = editText.getText().toString();
+        String barcode = barcodeText.getText().toString();
         if (bookInList(barcode)) {
             processExistingBook();
         } else {
@@ -70,17 +70,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    private void processBarcode(Intent data) {
-//        Bundle res = data.getExtras();
-//        String result = res.getString(BARCODE_VALUE);
-//        editText.setText(result);
-//        if (bookInList(result)) {
-//            processExistingBook();
-//        } else {
-//            processNewBook(barcode);
-//        }
-//    }
-//
     private void processNewBook(String barcode) {
         ListOfBooks.addBookToList(barcode);
     }
