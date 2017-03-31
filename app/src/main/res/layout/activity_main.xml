@@ -19,7 +19,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/scan"
+        android:id="@+id/scanButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -27,18 +27,32 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@id/editText"
         android:text="@string/button_scan"
-        android:onClick="sendMessage"
+        android:onClick="getBarcode"
         />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/showListButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="show list"
         android:onClick="showList"
         android:verticalSpacing="2dp"
-        android:paddingTop="10dp"
-        android:layout_toRightOf="@id/scan"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_toRightOf="@id/scanButton"
+        android:layout_below="@id/editText"
+        />
+
+    <Button
+        android:id="@+id/addToListButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add"
+        android:onClick="processBarcode"
+        android:verticalSpacing="2dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_toRightOf="@id/showListButton"
         android:layout_below="@id/editText"
         />
 
