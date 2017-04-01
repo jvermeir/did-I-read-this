@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void processNewBook(String barcode) {
-        ListOfBooks.addBookToList(barcode);
+        ListOfBooks.addBookToList(barcode, this);
     }
 
     private void processExistingBook() {
