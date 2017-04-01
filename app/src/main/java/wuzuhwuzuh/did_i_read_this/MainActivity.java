@@ -12,8 +12,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String BARCODE_VALUE = "barcode_value";
     private EditText barcodeText = null;
     public static final int GET_A_BARCODE = 1;
-    private Class barcodeActivityClass = GetBarcodeTestActivity.class;
-//    private Class barcodeActivityClass = GetBarcodeActivity.class;
+//    private Class barcodeActivityClass = GetBarcodeTestActivity.class;
+    private Class barcodeActivityClass = GetBarcodeActivity.class;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showList(View view) {
-        Intent intent = new Intent(this, ListViewLoaderActivity.class);
+        Intent intent = new Intent(this, BookListActivity.class);
         startActivity(intent);
     }
 
@@ -66,12 +66,12 @@ public class MainActivity extends AppCompatActivity {
         } else {
             processNewBook(barcode);
         }
-        Intent intent = new Intent(this, ListViewLoaderActivity.class);
+        Intent intent = new Intent(this, BookListActivity.class);
         startActivity(intent);
     }
 
     private void processNewBook(String barcode) {
-        ListOfBooks.addBookToList(barcode, this);
+        BookStore.addBookToList(barcode, this);
     }
 
     private void processExistingBook() {
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean bookInList(String book) {
-        return ListOfBooks.isInList(book);
+        return BookStore.isInList(book);
     }
 
 }

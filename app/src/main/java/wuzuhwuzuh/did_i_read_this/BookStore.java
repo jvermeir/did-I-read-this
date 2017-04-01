@@ -2,34 +2,35 @@ package wuzuhwuzuh.did_i_read_this;
 
 import android.app.Activity;
 import android.os.Environment;
+import android.util.ArraySet;
 import android.widget.Toast;
 
-import java.beans.IndexedPropertyChangeEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.Exchanger;
 
-public class ListOfBooks {
+public class BookStore {
 
-    private static final Set<String> books = new HashSet<>();
+    private static Set<String> books = null;
     private static final String STORE_FILE_NAME = "books.txt";
 
-    static {
-        readBookStore();
-    }
-
-    public static String[] getListOfBooks() {
+    public static String[] getListOfBooks(Activity activity) {
+        if (books==null) {
+            readBookStore(activity);
+        }
         String[] result = new String[books.size()];
         return books.toArray(result);
     }
 
     public static String[] addBookToList(String newBook, Activity activity) {
+        if (books==null) {
+            readBookStore(activity);
+        }
         books.add(newBook);
         writeBookStore(activity);
-        return getListOfBooks();
+        return getListOfBooks(activity);
     }
 
     public static boolean isInList(String book) {
@@ -38,7 +39,9 @@ public class ListOfBooks {
 
     private static void writeBookStore(Activity activity) {
         try {
-            File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + '/' + STORE_FILE_NAME);
+            File file = new File(activity
+                    .getApplicationContext().getFileStreamPath(STORE_FILE_NAME)
+                    .getPath());
             FileOutputStream fos = new FileOutputStream(file);
             try {
                 for (String book : books) {
@@ -52,10 +55,12 @@ public class ListOfBooks {
         }
     }
 
-    private static void readBookStore() {
+    private static void readBookStore(Activity activity) {
+        books = new ArraySet<>();
         try {
-            File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + '/' + STORE_FILE_NAME);
-            if (file.exists()) {
+            File file = new File(activity
+                    .getApplicationContext().getFileStreamPath(STORE_FILE_NAME)
+                    .getPath()); if (file.exists()) {
                 int length = (int) file.length();
                 byte[] bytes = new byte[length];
                 FileInputStream in = new FileInputStream(file);

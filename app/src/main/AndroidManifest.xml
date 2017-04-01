@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ListViewLoaderActivity"
+            android:name=".BookListActivity"
             android:label="@string/title_activity_list"
             android:parentActivityName=".MainActivity">
             <meta-data
