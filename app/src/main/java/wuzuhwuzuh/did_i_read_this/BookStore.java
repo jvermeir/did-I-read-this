@@ -17,15 +17,25 @@ public class BookStore {
     private static final String STORE_FILE_NAME = "books.txt";
 
     public static String[] getListOfBooks(Activity activity) {
-        if (books==null) {
+        if (books == null) {
             readBookStore(activity);
         }
         String[] result = new String[books.size()];
         return books.toArray(result);
     }
 
+    public static String[] removeBookFromList(String bookToDelete, Activity activity) {
+        if (books == null) {
+            books = new ArraySet<>();
+        } else {
+            books.remove(bookToDelete);
+        }
+        writeBookStore(activity);
+        return getListOfBooks(activity);
+    }
+
     public static String[] addBookToList(String newBook, Activity activity) {
-        if (books==null) {
+        if (books == null) {
             readBookStore(activity);
         }
         books.add(newBook);
@@ -60,7 +70,8 @@ public class BookStore {
         try {
             File file = new File(activity
                     .getApplicationContext().getFileStreamPath(STORE_FILE_NAME)
-                    .getPath()); if (file.exists()) {
+                    .getPath());
+            if (file.exists()) {
                 int length = (int) file.length();
                 byte[] bytes = new byte[length];
                 FileInputStream in = new FileInputStream(file);
