@@ -1,15 +1,24 @@
 package wuzuhwuzuh.did_i_read_this;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Environment;
 import android.util.ArraySet;
 import android.widget.Toast;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.util.HashSet;
 import java.util.Set;
+
+import static android.content.Context.*;
+import static android.content.Context.MODE_PRIVATE;
 
 public class BookStore {
 
@@ -43,42 +52,46 @@ public class BookStore {
         return getListOfBooks(activity);
     }
 
-    public static boolean isInList(String book) {
+    public static boolean isInList(String book, Activity activity) {
+        if (books == null) {
+            readBookStore(activity);
+        }
         return books.contains(book);
     }
 
     private static void writeBookStore(Activity activity) {
+        OutputStream os = null;
         try {
-            File file = new File(activity
-                    .getApplicationContext().getFileStreamPath(STORE_FILE_NAME)
-                    .getPath());
-            FileOutputStream fos = new FileOutputStream(file);
-            try {
-                for (String book : books) {
-                    fos.write((book + "\n").getBytes());
-                }
-            } finally {
-                fos.close();
+            os = DidIReadThis.getAppContext().openFileOutput(STORE_FILE_NAME, MODE_PRIVATE);
+            BufferedWriter out = new BufferedWriter(new OutputStreamWriter(os));
+            for (String book : books) {
+                out.write(book + "\n");
             }
+            out.flush();
+            out.close();
         } catch (Exception e) {
             Toast.makeText(activity, "Adding book failed", Toast.LENGTH_SHORT).show();
+        } finally {
+            try {
+                os.close();
+            } catch (IOException e) {
+                Toast.makeText(activity, "Adding book failed", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
     private static void readBookStore(Activity activity) {
         books = new ArraySet<>();
+        InputStream is = null;
         try {
-            File file = new File(activity
-                    .getApplicationContext().getFileStreamPath(STORE_FILE_NAME)
-                    .getPath());
-            if (file.exists()) {
-                int length = (int) file.length();
+            is = DidIReadThis.getAppContext().openFileInput(STORE_FILE_NAME);
+            int length = is.available();
+            if (length > 0) {
                 byte[] bytes = new byte[length];
-                FileInputStream in = new FileInputStream(file);
                 try {
-                    in.read(bytes);
+                    is.read(bytes);
                 } finally {
-                    in.close();
+                    is.close();
                 }
                 String contents = new String(bytes);
                 String[] lines = contents.split("\n");

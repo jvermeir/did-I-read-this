@@ -1,5 +1,6 @@
 package wuzuhwuzuh.did_i_read_this;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int GET_A_BARCODE = 1;
 //    private Class barcodeActivityClass = GetBarcodeTestActivity.class;
     private Class barcodeActivityClass = GetBarcodeActivity.class;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean bookInList(String book) {
-        return BookStore.isInList(book);
+        return BookStore.isInList(book, this);
     }
 
 }
